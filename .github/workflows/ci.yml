@@ -29,7 +29,7 @@ jobs:
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - name: Build
-        run: wasm-pack build --target nodejs --out-dir pkg
+        run: wasm-pack build --target nodejs --out-dir pkg --scope osu-tournament-rating
 
       - name: Check .d.ts file
         run: |
@@ -68,7 +68,7 @@ jobs:
 
       - name: Build & zip
         run: |
-          wasm-pack build --release --target ${{ matrix.target }} --out-dir pkg
+          wasm-pack build --release --target ${{ matrix.target }} --out-dir pkg --scope osu-tournament-rating
           ls -ghG pkg
           tar -czvf rosu_pp_js_${{ matrix.target }}.tar.gz -C pkg .
 
@@ -112,3 +112,4 @@ jobs:
         with:
           package: ./extracted
           token: ${{ secrets.NPM_TOKEN }}
+          access: public
